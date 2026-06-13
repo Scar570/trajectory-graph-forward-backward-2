@@ -280,34 +280,61 @@ d3.json("graph_bidirectional.json").then(graph => {
         .attr("font-weight", "bold")
         .text(d => d.forward_id);
 
+    // =====================================
+    // THETA MANY TO ONE
     // RED OUTER RING
+    // =====================================
 
     thumbGroup
-        .filter(d => d.many_to_one)
+        .filter(d => d.theta_many_to_one)
         .append("circle")
         .attr("cx", d => xScale(d.frame))
         .attr("cy", d => yScale(d.y))
-        .attr("r", 22)
+        .attr("r", 26)
         .attr("fill", "none")
         .attr("stroke", "red")
         .attr("stroke-width", 3);
 
-    // YELLOW RING
+
+    // =====================================
+    // SWITCH EVENT
+    // YELLOW
+    // =====================================
 
     thumbGroup
         .filter(d => d.switch_event)
         .append("circle")
         .attr("cx", d => xScale(d.frame))
         .attr("cy", d => yScale(d.y))
-        .attr("r", 18)
+        .attr("r", 22)
         .attr("fill", "none")
         .attr("stroke", "yellow")
         .attr("stroke-width", 3);
 
-    // GREEN INNER RING
+
+    // =====================================
+    // PHI MANY TO ONE
+    // BLUE
+    // =====================================
 
     thumbGroup
-        .filter(d => d.one_to_many)
+        .filter(d => d.phi_many_to_one)
+        .append("circle")
+        .attr("cx", d => xScale(d.frame))
+        .attr("cy", d => yScale(d.y))
+        .attr("r", 18)
+        .attr("fill", "none")
+        .attr("stroke", "#00bfff")
+        .attr("stroke-width", 3);
+
+
+    // =====================================
+    // THETA ONE TO MANY
+    // GREEN
+    // =====================================
+
+    thumbGroup
+        .filter(d => d.theta_one_to_many)
         .append("circle")
         .attr("cx", d => xScale(d.frame))
         .attr("cy", d => yScale(d.y))
@@ -315,6 +342,24 @@ d3.json("graph_bidirectional.json").then(graph => {
         .attr("fill", "none")
         .attr("stroke", "lime")
         .attr("stroke-width", 3);
+
+
+    // =====================================
+    // PHI ONE TO MANY
+    // PURPLE
+    // =====================================
+
+    thumbGroup
+        .filter(d => d.phi_one_to_many)
+        .append("circle")
+        .attr("cx", d => xScale(d.frame))
+        .attr("cy", d => yScale(d.y))
+        .attr("r", 10)
+        .attr("fill", "none")
+        .attr("stroke", "#ff00ff")
+        .attr("stroke-width", 3);
+
+    
 
     thumbGroup.append("image")
         .attr("href", d => d.image)
@@ -332,8 +377,10 @@ d3.json("graph_bidirectional.json").then(graph => {
                     <b>Backward ID:</b> ${d.backward_id}<br>
                     <b>Frame:</b> ${d.frame}<br>
                     <b>IOA:</b> ${d.ioa.toFixed(3)}<br>
-                    <b>Many-to-One:</b> ${d.many_to_one}<br>
-                    <b>One-to-Many:</b> ${d.one_to_many}
+                    <b>Theta M→1:</b> ${d.theta_many_to_one}<br>
+                    <b>Theta 1→M:</b> ${d.theta_one_to_many}<br>
+                    <b>Phi M→1:</b> ${d.phi_many_to_one}<br>
+                    <b>Phi 1→M:</b> ${d.phi_one_to_many}
                 `);
         })
 
